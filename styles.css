@@ -1,0 +1,498 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #F5E6D3;
+}
+
+header {
+    background: #8B4513;
+    color: #fff;
+    padding: 1rem;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    flex-wrap: wrap;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 0.5rem 0.8rem;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 500;
+    position: relative;
+}
+
+nav ul li a.active {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+nav ul li a:hover {
+    color: #FFE4C4;
+    transition: color 0.3s;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 1rem;
+}
+
+/* 添加响应式设计 */
+@media screen and (max-width: 1200px) {
+    nav ul li a {
+        padding: 0.5rem 0.6rem;
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    nav {
+        flex-direction: column;
+        padding: 1rem;
+    }
+    
+    nav ul {
+        margin-top: 1rem;
+        justify-content: center;
+    }
+    
+    .logo {
+        margin-bottom: 0.5rem;
+    }
+}
+
+/* Banner样式 */
+.slider {
+    position: relative;
+    height: 500px;
+    overflow: hidden;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.slide.active {
+    opacity: 1;
+}
+
+.slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prev, .next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: #fff;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+}
+
+.prev {
+    left: 10px;
+}
+
+.next {
+    right: 10px;
+}
+
+/* Contact页面布局样式 */
+#contact {
+    max-width: 1200px;
+    margin: 4rem auto;
+}
+
+/* 上部分样式 */
+.contact-header {
+    text-align: left;
+    background-color: #FFF8EF;
+    border-radius: 8px 8px 0 0;
+    box-shadow: 0 2px 10px rgba(139, 69, 19, 0.1);
+    padding: 2rem;
+}
+
+#contact h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.contact-intro {
+    max-width: 800px;
+}
+
+.contact-intro h2 {
+    font-size: 1.8rem;
+    color: #444;
+    margin-bottom: 1.5rem;
+    line-height: 1.4;
+}
+
+.contact-intro p {
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+}
+
+/* 下部分样式 */
+.contact-bottom {
+    display: flex;
+    background-color: #FFF8EF;
+    border-radius: 0 0 8px 8px;
+}
+
+.contact-left {
+    flex: 1;
+    padding: 2rem;
+    border-right: 1px solid #DEB887;
+}
+
+.contact-right {
+    flex: 1;
+    padding: 2rem;
+}
+
+.contact-left h3,
+.contact-right h3 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+.contact-info {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.contact-desc {
+    color: #666;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-item i {
+    color: #8B4513;
+    font-size: 1.2rem;
+    width: 24px;
+}
+
+/* 表单样式 */
+#contactForm {
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #444;
+    font-weight: 500;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #DEB887;
+    border-radius: 4px;
+    font-size: 1rem;
+    background-color: #FFF;
+}
+
+textarea {
+    height: 150px;
+    resize: vertical;
+}
+
+button[type="submit"] {
+    background: #8B4513;
+    color: #fff;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background: #A0522D;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 992px) {
+    .contact-bottom {
+        flex-direction: column;
+    }
+
+    .contact-left,
+    .contact-right {
+        width: 100%;
+        border-right: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #contact {
+        margin: 2rem auto;
+    }
+
+    #contact h1 {
+        font-size: 2rem;
+    }
+
+    .contact-intro h2 {
+        font-size: 1.5rem;
+    }
+
+    .contact-left h3,
+    .contact-right h3 {
+        font-size: 1.5rem;
+    }
+}
+
+footer {
+    background: #8B4513;
+    color: #fff;
+    text-align: center;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Banner显示控制样式 */
+#banner {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#banner.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 调整容区域的上边距 */
+section:not(#banner) {
+    margin-top: 2rem;
+}
+
+/* 当 banner 隐藏时，为其他部分添加额外的上边距 */
+body:not([data-showing-banner]) section:not(#banner):first-of-type {
+    margin-top: 6rem;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+.nav-link.active {
+    /* 可以添加一些激活状态的样式 */
+    color: #your-active-color;
+    font-weight: bold;
+}
+
+/* 通用section样式 */
+.section-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 3rem;
+    color: #8B4513;
+}
+
+/* Products section */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+.product-card {
+    background: #FFF8EF;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+}
+
+.product-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-card h3, .product-card p {
+    padding: 1rem;
+    margin: 0;
+}
+
+/* Customization section */
+.custom-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+}
+
+.custom-option {
+    background: #FFF8EF;
+    border-radius: 8px;
+    padding: 2rem;
+    text-align: center;
+}
+
+.custom-option img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Cases section */
+.case-studies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.case {
+    background: #FFF8EF;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.case img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+
+.case h3, .case p {
+    padding: 1rem;
+    margin: 0;
+}
+
+/* About section */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.about-content img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Articles section */
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.article-card {
+    background: #FFF8EF;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.article-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.article-card h3, .article-card p {
+    padding: 1rem;
+    margin: 0;
+}
+
+.read-more {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 1rem;
+    background: #8B4513;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 4px;
+}
+
+/* 响应式调整 */
+@media screen and (max-width: 768px) {
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-content {
+        padding: 2rem 1rem;
+    }
+    
+    .section h2 {
+        font-size: 2rem;
+    }
+} 
