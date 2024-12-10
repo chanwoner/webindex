@@ -45,6 +45,37 @@ function initializeSlider() {
 function initializeEmailJS() {
     emailjs.init("aYI6g9vNXr5oOhTyv");
 
+    // 获取当前语言设置
+    function getCurrentLang() {
+        return localStorage.getItem('language') || 'en';
+    }
+
+    // 创建 toast 容器
+    const toastContainer = document.createElement('div');
+    toastContainer.className = 'toast-container';
+    document.body.appendChild(toastContainer);
+
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icon = type === 'success' ? 'check-circle' : 'exclamation-circle';
+        toast.innerHTML = `
+            <i class="fas fa-${icon}"></i>
+            <span>${message}</span>
+        `;
+        
+        toastContainer.appendChild(toast);
+
+        // 3秒后自动消失
+        setTimeout(() => {
+            toast.style.animation = 'fadeOut 0.3s ease-out forwards';
+            setTimeout(() => {
+                toastContainer.removeChild(toast);
+            }, 300);
+        }, 3000);
+    }
+
     const contactForm = document.getElementById('contactForm');
     if (!contactForm) return;
 
@@ -54,22 +85,22 @@ function initializeEmailJS() {
         const submitButton = this.querySelector('button[type="submit"]');
         const originalText = submitButton.textContent;
         submitButton.disabled = true;
-        submitButton.textContent = 'Sending...';
+        submitButton.textContent = translations[getCurrentLang()].contact.form.sending;
 
         emailjs.sendForm(
             'service_og14a2r',
             'template_u214xzn',
             this
         )
-        .then(function() {
-            alert('Message sent successfully!');
+        .then(() => {
+            showToast(translations[getCurrentLang()].contact.form.success);
             contactForm.reset();
         })
-        .catch(function(error) {
+        .catch(error => {
             console.error('Error:', error);
-            alert('Failed to send message. Please try again later.');
+            showToast(translations[getCurrentLang()].contact.form.error, 'error');
         })
-        .finally(function() {
+        .finally(() => {
             submitButton.disabled = false;
             submitButton.textContent = originalText;
         });
@@ -81,19 +112,29 @@ function initializeNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.section');
 
+    // 显示指定部分
+    function showSection(sectionId) {
+        // 移除所有活动状态
+        navLinks.forEach(link => link.classList.remove('active'));
+        sections.forEach(section => section.classList.remove('active'));
+        
+        // 添加新的活动状态
+        const targetSection = document.getElementById(sectionId);
+        const targetNav = document.querySelector(`.nav-link[href="#${sectionId}"]`);
+        
+        if (targetSection && targetNav) {
+            targetSection.classList.add('active');
+            targetNav.classList.add('active');
+        }
+    }
+
+    // 导航链接点击事件
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
-            
-            navLinks.forEach(link => link.classList.remove('active'));
-            sections.forEach(section => section.classList.remove('active'));
-            
-            this.classList.add('active');
-            const sectionId = this.getAttribute('data-section');
-            const targetSection = document.getElementById(sectionId);
-            if (targetSection) {
-                targetSection.classList.add('active');
-            }
+            const href = this.getAttribute('href');
+            const sectionId = href.substring(1); // 移除 '#' 符号
+            showSection(sectionId);
         });
     });
 
@@ -101,19 +142,8 @@ function initializeNavigation() {
     document.querySelectorAll('.cta-button').forEach(button => {
         button.addEventListener('click', function(e) {
             e.preventDefault();
-            
             const targetId = this.getAttribute('href').substring(1);
-            
-            navLinks.forEach(link => link.classList.remove('active'));
-            sections.forEach(section => section.classList.remove('active'));
-            
-            const targetSection = document.getElementById(targetId);
-            const targetNav = document.querySelector(`.nav-link[data-section="${targetId}"]`);
-            
-            if (targetSection && targetNav) {
-                targetSection.classList.add('active');
-                targetNav.classList.add('active');
-            }
+            showSection(targetId);
             
             window.scrollTo({
                 top: 0,
@@ -121,6 +151,21 @@ function initializeNavigation() {
             });
         });
     });
+
+    // 处理 URL hash 变化
+    window.addEventListener('hashchange', function() {
+        const hash = window.location.hash;
+        if (hash) {
+            const sectionId = hash.substring(1);
+            showSection(sectionId);
+        }
+    });
+
+    // 初始加载时检查 URL hash
+    if (window.location.hash) {
+        const sectionId = window.location.hash.substring(1);
+        showSection(sectionId);
+    }
 }
 
 // Banner显示控制初始化
@@ -277,7 +322,7 @@ function initializeLanguageSwitcher() {
         }
 
         // 更新溯源验证部分
-        const traceSection = document.querySelector('#private-label');
+        const traceSection = document.querySelector('#product-trace');
         if (traceSection && translations[lang]?.trace) {
             const elements = {
                 h2: traceSection.querySelector('h2'),
@@ -292,6 +337,151 @@ function initializeLanguageSwitcher() {
             if (elements.p) elements.p.textContent = translations[lang].trace.description;
             if (elements.input) elements.input.placeholder = translations[lang].trace.placeholder;
             if (elements.button) elements.button.textContent = translations[lang].trace.button;
+        }
+
+        // 更新联系我们部分
+        const contactSection = document.querySelector('#contact');
+        if (contactSection && translations[lang]?.contact) {
+            const contact = translations[lang].contact;
+            const elements = {
+                title: contactSection.querySelector('h1'),
+                subtitle: contactSection.querySelector('.contact-intro h2'),
+                desc: contactSection.querySelector('.contact-intro p'),
+                infoTitle: contactSection.querySelector('.contact-left h3'),
+                infoDesc: contactSection.querySelector('.contact-desc'),
+                formTitle: contactSection.querySelector('.contact-right h3'),
+                nameLabel: contactSection.querySelector('label[for="name"]'),
+                emailLabel: contactSection.querySelector('label[for="email"]'),
+                messageLabel: contactSection.querySelector('label[for="message"]'),
+                submitButton: contactSection.querySelector('button[type="submit"]')
+            };
+
+            if (elements.title) elements.title.textContent = contact.title;
+            if (elements.subtitle) elements.subtitle.textContent = contact.subtitle;
+            if (elements.desc) elements.desc.textContent = contact.description;
+            if (elements.infoTitle) elements.infoTitle.textContent = contact.info.title;
+            if (elements.infoDesc) elements.infoDesc.textContent = contact.info.desc;
+            if (elements.formTitle) elements.formTitle.textContent = contact.form.title;
+            if (elements.nameLabel) elements.nameLabel.textContent = contact.form.name;
+            if (elements.emailLabel) elements.emailLabel.textContent = contact.form.email;
+            if (elements.messageLabel) elements.messageLabel.textContent = contact.form.message;
+            if (elements.submitButton) elements.submitButton.textContent = contact.form.button;
+        }
+
+        // 更新文章部分
+        const articlesSection = document.querySelector('#articles');
+        if (articlesSection && translations[lang]?.articles) {
+            const articles = translations[lang].articles;
+            const title = articlesSection.querySelector('h2');
+            if (title) title.textContent = articles.title;
+
+            const articleCards = articlesSection.querySelectorAll('.article-card');
+            articleCards.forEach((card, index) => {
+                if (articles.items[index]) {
+                    const h3 = card.querySelector('h3');
+                    const p = card.querySelector('p');
+                    const readMore = card.querySelector('.read-more');
+                    
+                    if (h3) h3.textContent = articles.items[index].title;
+                    if (p) p.textContent = articles.items[index].desc;
+                    if (readMore) readMore.textContent = articles.readMore;
+                }
+            });
+        }
+
+        // 更新页脚
+        const footer = document.querySelector('footer');
+        if (footer && translations[lang]?.footer) {
+            const footerTrans = translations[lang].footer;
+            
+            const companyDesc = footer.querySelector('.footer-section p');
+            const quickLinksTitle = footer.querySelector('.footer-section:nth-child(2) h4');
+            const contactTitle = footer.querySelector('.footer-section:nth-child(3) h4');
+            
+            if (companyDesc) companyDesc.textContent = footerTrans.company.desc;
+            if (quickLinksTitle) quickLinksTitle.textContent = footerTrans.quickLinks.title;
+            if (contactTitle) contactTitle.textContent = footerTrans.contact.title;
+
+            // 更新快速链接
+            const quickLinks = footer.querySelectorAll('.footer-section:nth-child(2) ul li a');
+            quickLinks.forEach(link => {
+                const key = link.getAttribute('href').substring(1);
+                if (footerTrans.quickLinks.links[key]) {
+                    link.textContent = footerTrans.quickLinks.links[key];
+                }
+            });
+        }
+
+        // 更新产品部分
+        const productsSection = document.querySelector('#products');
+        if (productsSection && translations[lang]?.products) {
+            const products = translations[lang].products;
+            const title = productsSection.querySelector('h2');
+            if (title) title.textContent = products.title;
+
+            const productCards = productsSection.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                if (products.items[index]) {
+                    const h3 = card.querySelector('h3');
+                    const p = card.querySelector('p');
+                    if (h3) h3.textContent = products.items[index].title;
+                    if (p) p.textContent = products.items[index].desc;
+                }
+            });
+        }
+
+        // 更新定制部分
+        const customizationSection = document.querySelector('#customization');
+        if (customizationSection && translations[lang]?.customization) {
+            const customization = translations[lang].customization;
+            const title = customizationSection.querySelector('h2');
+            if (title) title.textContent = customization.title;
+
+            const customOptions = customizationSection.querySelectorAll('.custom-option');
+            customOptions.forEach((option, index) => {
+                if (customization.items[index]) {
+                    const h3 = option.querySelector('h3');
+                    const p = option.querySelector('p');
+                    if (h3) h3.textContent = customization.items[index].title;
+                    if (p) p.textContent = customization.items[index].desc;
+                }
+            });
+        }
+
+        // 更新案例部分
+        const casesSection = document.querySelector('#cases');
+        if (casesSection && translations[lang]?.cases) {
+            const cases = translations[lang].cases;
+            const title = casesSection.querySelector('h2');
+            if (title) title.textContent = cases.title;
+
+            const caseItems = casesSection.querySelectorAll('.case');
+            caseItems.forEach((item, index) => {
+                if (cases.items[index]) {
+                    const h3 = item.querySelector('h3');
+                    const p = item.querySelector('p');
+                    if (h3) h3.textContent = cases.items[index].title;
+                    if (p) p.textContent = cases.items[index].desc;
+                }
+            });
+        }
+
+        // 更新关于我们部分
+        const aboutSection = document.querySelector('#about');
+        if (aboutSection && translations[lang]?.about) {
+            const about = translations[lang].about;
+            const title = aboutSection.querySelector('h2');
+            if (title) title.textContent = about.title;
+
+            const storyTitle = aboutSection.querySelector('.about-text h3:first-child');
+            const storyDesc = aboutSection.querySelector('.about-text p:first-of-type');
+            const missionTitle = aboutSection.querySelector('.about-text h3:last-child');
+            const missionDesc = aboutSection.querySelector('.about-text p:last-of-type');
+
+            if (storyTitle) storyTitle.textContent = about.story.title;
+            if (storyDesc) storyDesc.textContent = about.story.desc;
+            if (missionTitle) missionTitle.textContent = about.mission.title;
+            if (missionDesc) missionDesc.textContent = about.mission.desc;
         }
     }
 }
