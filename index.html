@@ -6,7 +6,9 @@
     <title>公司官网</title>
     <link rel="stylesheet" href="styles.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
 </head>
 <body>
     <header>
@@ -22,6 +24,10 @@
                 <li><a href="#articles" class="nav-link" data-section="articles">ARTICLES</a></li>
                 <li><a href="#contact" class="nav-link" data-section="contact">CONTACT</a></li>
             </ul>
+            <div class="language-switcher">
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="zh">中</button>
+            </div>
         </nav>
     </header>
 
@@ -40,6 +46,34 @@
                 </div>
                 <button class="prev">&#10094;</button>
                 <button class="next">&#10095;</button>
+            </div>
+
+            <div class="home-intro">
+                <div class="intro-content">
+                    <h1>Welcome to QM Makeup</h1>
+                    <p class="tagline">Your Premier Partner in Professional Beauty Solutions</p>
+                    <div class="intro-features">
+                        <div class="feature">
+                            <i class="fas fa-medal"></i>
+                            <h3>Premium Quality</h3>
+                            <p>Over 13 years of excellence in permanent makeup and eyelash manufacturing</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-flask"></i>
+                            <h3>Innovation</h3>
+                            <p>Cutting-edge technology and continuous product development</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-globe"></i>
+                            <h3>Global Reach</h3>
+                            <p>Trusted by professionals in over 50 countries worldwide</p>
+                        </div>
+                    </div>
+                    <div class="intro-cta">
+                        <a href="#products" class="cta-button">Explore Products</a>
+                        <a href="#contact" class="cta-button secondary">Contact Us</a>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -107,7 +141,26 @@
 
         <!-- Private Label section -->
         <section id="private-label" class="section">
-            <!-- 私人标签内容 -->
+            <div class="section-content">
+                <h2>Product Authentication</h2>
+                <div class="trace-container">
+                    <div class="trace-content">
+                        <h3>Verify Your Product</h3>
+                        <p>Enter your product's trace code to verify its authenticity and track its origin.</p>
+                        <div class="trace-form">
+                            <input type="text" 
+                                   id="traceCode" 
+                                   placeholder="Enter trace code here..."
+                                   pattern="[A-Za-z0-9]+"
+                                   maxlength="16">
+                            <button id="verifyButton">Verify</button>
+                        </div>
+                        <div id="resultContainer" class="result-container">
+                            <!-- 结果将在这里动态显示 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- About section -->
@@ -186,7 +239,7 @@
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>Room 1027, 10F, Niu Ben Fortune Building, 50 juyuan Street, Baiyun District, Guangzhou</span>
+                                <span>Room 1027, 10F, Niu Ben Fortune Building, Baiyun District, Guangzhou</span>
                             </div>
                         </div>
                     </div>
