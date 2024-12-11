@@ -7,8 +7,12 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/code.js"></script>
 </head>
 <body>
+    <div id="header-container"></div>
+
     <div class="admin-container">
         <h1>产品信息录入</h1>
         <form id="productForm" class="product-form">
@@ -51,149 +55,11 @@
         </div>
     </div>
 
+    <div id="footer-container"></div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const productForm = document.getElementById('productForm');
-            const resultSection = document.getElementById('result');
-            const qrcodeDiv = document.getElementById('qrcode');
-            const traceCodeSpan = document.getElementById('traceCode');
-            const copyBtn = document.getElementById('copyBtn');
-            const downloadBtn = document.getElementById('downloadBtn');
-
-            productForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-
-                // 收集表单数据
-                const formData = new FormData(this);
-                const productData = Object.fromEntries(formData.entries());
-
-                // 生成唯一的溯源码（这里使用时间戳+随机数的组合）
-                const timestamp = Date.now().toString(36);
-                const random = Math.random().toString(36).substring(2, 8);
-                const traceCode = `QM${timestamp}${random}`.toUpperCase();
-
-                // 将溯源码添加到产品数据中
-                productData.traceCode = traceCode;
-
-                // 创建包含完整产品信息的二维码内容
-                const qrContent = JSON.stringify({
-                    traceCode: traceCode,
-                    productName: productData.productName,
-                    model: productData.model,
-                    manufactureDate: productData.manufactureDate,
-                    batchNumber: productData.batchNumber,
-                    materials: productData.materials
-                });
-
-                try {
-                    // 这里应该是向后端API发送数据的请求
-                    // const response = await fetch('your-api-endpoint', {
-                    //     method: 'POST',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(productData)
-                    // });
-                    
-                    // 清除之前的二维码
-                    qrcodeDiv.innerHTML = '';
-
-                    // 使用 Base64 编码
-                    const encodedData = btoa(qrContent);
-                    const resultUrl = `trace-result.html?d=${encodedData}`;
-                    const qrcode = new QRCode(qrcodeDiv, {
-                        text: resultUrl,
-                        width: 200,
-                        height: 200,
-                        colorDark: "#8B4513",
-                        colorLight: "#ffffff",
-                        correctLevel: QRCode.CorrectLevel.H
-                    });
-
-                    // 显示溯源码
-                    traceCodeSpan.textContent = traceCode;
-
-                    // 显示结果区域
-                    resultSection.style.display = 'block';
-
-                    // 显示产品信息摘要
-                    const productSummary = document.createElement('div');
-                    productSummary.className = 'product-summary';
-                    productSummary.innerHTML = `
-                        <h3>产品信息</h3>
-                        <div class="summary-item">
-                            <span class="label">产品名称：</span>
-                            <span>${productData.productName}</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="label">产品型号：</span>
-                            <span>${productData.model}</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="label">生产日期：</span>
-                            <span>${productData.manufactureDate}</span>
-                        </div>
-                        <div class="summary-item">
-                            <span class="label">生产批次：</span>
-                            <span>${productData.batchNumber}</span>
-                        </div>
-                    `;
-                    
-                    // 将产品信息摘要插入到二维码容器后面
-                    document.querySelector('.qr-container').appendChild(productSummary);
-
-                    // 清空表单
-                    productForm.reset();
-
-                } catch (error) {
-                    console.error('Error:', error);
-                    alert('生成溯源码失败，请重试');
-                }
-            });
-
-            // 复制溯源码
-            copyBtn.addEventListener('click', function() {
-                const traceCode = traceCodeSpan.textContent;
-                navigator.clipboard.writeText(traceCode).then(() => {
-                    showToast('溯源码已复制到剪贴板');
-                });
-            });
-
-            // 下载二维码
-            downloadBtn.addEventListener('click', function() {
-                const canvas = qrcodeDiv.querySelector('canvas');
-                if (canvas) {
-                    const link = document.createElement('a');
-                    link.download = `QM-${traceCodeSpan.textContent}.png`;
-                    link.href = canvas.toDataURL();
-                    link.click();
-                }
-            });
-
-            // 显示提示信息
-            function showToast(message) {
-                const toast = document.createElement('div');
-                toast.className = 'toast success';
-                toast.innerHTML = `
-                    <i class="fas fa-check-circle"></i>
-                    <span>${message}</span>
-                `;
-                
-                const container = document.querySelector('.toast-container') || 
-                    (() => {
-                        const cont = document.createElement('div');
-                        cont.className = 'toast-container';
-                        document.body.appendChild(cont);
-                        return cont;
-                    })();
-                
-                container.appendChild(toast);
-                
-                setTimeout(() => {
-                    toast.style.animation = 'fadeOut 0.3s ease-out forwards';
-                    setTimeout(() => container.removeChild(toast), 300);
-                }, 3000);
-            }
+            loadComponents();
         });
     </script>
 </body>

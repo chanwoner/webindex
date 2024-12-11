@@ -3,306 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>公司官网</title>
+    <title>QM Makeup</title>
     <link rel="stylesheet" href="styles.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <script src="translations.js"></script>
-    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/translations.js"></script>
+    <script src="js/slider.js"></script>
+    <script src="js/contact.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/language-switcher.js"></script>
+    <script src="js/banner-visibility.js"></script>
+    <script src="js/script.js"></script>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">QM</div>
-            <ul>
-                <li><a href="#home" class="nav-link active" data-section="home">HOME</a></li>
-                <li><a href="#products" class="nav-link" data-section="products">PRODUCTS</a></li>
-                <li><a href="#customization" class="nav-link" data-section="customization">CUSTOMIZATION</a></li>
-                <li><a href="#cases" class="nav-link" data-section="cases">CASES</a></li>
-                <li><a href="#product-trace" class="nav-link" data-section="privateLabel">PRODUCT TRACE</a></li>
-                <li><a href="#about" class="nav-link" data-section="about">ABOUT QM</a></li>
-                <li><a href="#articles" class="nav-link" data-section="articles">ARTICLES</a></li>
-                <li><a href="#contact" class="nav-link" data-section="contact">CONTACT</a></li>
-            </ul>
-            <div class="language-switcher">
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="zh">中</button>
-            </div>
-        </nav>
-    </header>
+    <div id="header-container"></div>
 
     <main>
         <!-- Home section -->
         <section id="home" class="section active">
-            <div class="slider">
-                <div class="slide active">
-                    <img src="https://picsum.photos/1920/800?random=1" alt="Banner 1">
-                </div>
-                <div class="slide">
-                    <img src="https://picsum.photos/1920/800?random=2" alt="Banner 2">
-                </div>
-                <div class="slide">
-                    <img src="https://picsum.photos/1920/800?random=3" alt="Banner 3">
-                </div>
-                <button class="prev">&#10094;</button>
-                <button class="next">&#10095;</button>
-            </div>
-
-            <div class="home-intro">
-                <div class="intro-content">
-                    <h1>Welcome to QM Makeup</h1>
-                    <p class="tagline">Your Premier Partner in Professional Beauty Solutions</p>
-                    <div class="intro-features">
-                        <div class="feature">
-                            <i class="fas fa-medal"></i>
-                            <h3>Premium Quality</h3>
-                            <p>Over 13 years of excellence in permanent makeup and eyelash manufacturing</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-flask"></i>
-                            <h3>Innovation</h3>
-                            <p>Cutting-edge technology and continuous product development</p>
-                        </div>
-                        <div class="feature">
-                            <i class="fas fa-globe"></i>
-                            <h3>Global Reach</h3>
-                            <p>Trusted by professionals in over 50 countries worldwide</p>
-                        </div>
-                    </div>
-                    <div class="intro-cta">
-                        <a href="#products" class="cta-button">Explore Products</a>
-                        <a href="#contact" class="cta-button secondary">Contact Us</a>
-                    </div>
-                </div>
-            </div>
+            <!-- ... home section content ... -->
         </section>
 
         <!-- Products section -->
         <section id="products" class="section">
-            <div class="section-content">
-                <h2>Our Products</h2>
-                <div class="product-grid">
-                    <div class="product-card">
-                        <img src="https://picsum.photos/300/200?random=4" alt="Product 1">
-                        <h3>Premium Eyelashes</h3>
-                        <p>High-quality synthetic eyelashes for professional use.</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://picsum.photos/300/200?random=5" alt="Product 2">
-                        <h3>Makeup Tools</h3>
-                        <p>Professional-grade makeup application tools.</p>
-                    </div>
-                    <div class="product-card">
-                        <img src="https://picsum.photos/300/200?random=6" alt="Product 3">
-                        <h3>Permanent Makeup</h3>
-                        <p>Long-lasting makeup solutions for beauty professionals.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- ... products section content ... -->
         </section>
 
         <!-- Customization section -->
         <section id="customization" class="section">
-            <div class="section-content">
-                <h2>Customization Services</h2>
-                <div class="custom-options">
-                    <div class="custom-option">
-                        <img src="https://picsum.photos/400/300?random=7" alt="Custom 1">
-                        <h3>Custom Packaging</h3>
-                        <p>Create your own branded packaging design.</p>
-                    </div>
-                    <div class="custom-option">
-                        <img src="https://picsum.photos/400/300?random=8" alt="Custom 2">
-                        <h3>Product Development</h3>
-                        <p>Develop unique products tailored to your needs.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- ... customization section content ... -->
         </section>
 
         <!-- Cases section -->
         <section id="cases" class="section">
-            <div class="section-content">
-                <h2>Success Cases</h2>
-                <div class="case-studies">
-                    <div class="case">
-                        <img src="https://picsum.photos/350/250?random=9" alt="Case 1">
-                        <h3>Beauty Salon Transformation</h3>
-                        <p>How our products helped a local salon increase revenue by 150%.</p>
-                    </div>
-                    <div class="case">
-                        <img src="https://picsum.photos/350/250?random=10" alt="Case 2">
-                        <h3>International Brand Launch</h3>
-                        <p>Supporting a new beauty brand's successful market entry.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- ... cases section content ... -->
         </section>
 
-        <!-- Private Label section -->
+        <!-- Product Trace section -->
         <section id="product-trace" class="section">
-            <div class="section-content">
-                <h2>Product Authentication</h2>
-                <div class="trace-container">
-                    <div class="trace-content">
-                        <h3>Verify Your Product</h3>
-                        <p>Enter your product's trace code to verify its authenticity and track its origin.</p>
-                        <div class="trace-form">
-                            <input type="text" 
-                                   id="traceCode" 
-                                   placeholder="Enter trace code here..."
-                                   pattern="[A-Za-z0-9]+"
-                                   maxlength="16">
-                            <button id="verifyButton">Verify</button>
-                        </div>
-                        <div id="resultContainer" class="result-container">
-                            <!-- 结果将在这里动态显示 -->
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <!-- ... product trace section content ... -->
         </section>
 
         <!-- About section -->
         <section id="about" class="section">
-            <div class="section-content">
-                <h2>About QM</h2>
-                <div class="about-content">
-                    <img src="https://picsum.photos/500/300?random=11" alt="About Us">
-                    <div class="about-text">
-                        <h3>Our Story</h3>
-                        <p>Founded in 2010, QM has grown to become a leading manufacturer of permanent makeup and eyelash products. With over a decade of experience, we pride ourselves on innovation, quality, and customer satisfaction.</p>
-                        <h3>Our Mission</h3>
-                        <p>To provide beauty professionals with the highest quality products and support their success through continuous innovation and exceptional service.</p>
-                    </div>
-                </div>
-            </div>
+            <!-- ... about section content ... -->
         </section>
 
         <!-- Articles section -->
         <section id="articles" class="section">
-            <div class="section-content">
-                <h2>Latest Articles</h2>
-                <div class="article-grid">
-                    <article class="article-card">
-                        <img src="https://picsum.photos/300/200?random=12" alt="Article 1">
-                        <h3>2024 Beauty Trends</h3>
-                        <p>Discover the latest trends in permanent makeup and eyelash extensions.</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </article>
-                    <article class="article-card">
-                        <img src="https://picsum.photos/300/200?random=13" alt="Article 2">
-                        <h3>Professional Tips</h3>
-                        <p>Expert advice for beauty professionals to grow their business.</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </article>
-                    <article class="article-card">
-                        <img src="https://picsum.photos/300/200?random=14" alt="Article 3">
-                        <h3>Product Care Guide</h3>
-                        <p>How to maintain and store your beauty products properly.</p>
-                        <a href="#" class="read-more">Read More</a>
-                    </article>
-                </div>
-            </div>
+            <!-- ... articles section content ... -->
         </section>
 
         <!-- Contact section -->
         <section id="contact" class="section">
-            <!-- 上部分 -->
-            <div class="contact-header">
-                <h1>CONTACT</h1>
-                <div class="contact-intro">
-                    <h2>The Most Trusted Permanent Makeup and Eyelashes Manufacturer</h2>
-                    <p>Our dedicated team is here to assist you with any inquiries about our products, services or partnership opportunities. Reach out via phone, email, or our contact form, and allow us to help elevate your craft. Discover how QMmakeup can be your trusted partner in artistry and excellence today.</p>
-                </div>
-            </div>
-        
-            <!-- 下部分：左右布局 -->
-            <div class="contact-bottom">
-                <div class="contact-left">
-                    <h3>Contact Information</h3>
-                    <div class="contact-info">
-                        <p class="contact-desc">Whether you have questions about bookings, or want to share your feedback, we are here to assist you promptly and efficiently.</p>
-                        
-                        <div class="contact-details">
-                            <div class="contact-item">
-                                <i class="fas fa-user"></i>
-                                <span>Liqin Huang</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone"></i>
-                                <span>+86 181 2277 8219</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-phone-office"></i>
-                                <span>020-86600236</span>
-                            </div>
-                            <div class="contact-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span>Room 1027, 10F, Niu Ben Fortune Building, Baiyun District, Guangzhou</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="contact-right">
-                    <h3>Send Message</h3>
-                    <form id="contactForm">
-                        <div class="form-group">
-                            <label for="name">Name:</label>
-                            <input type="text" id="name" name="from_name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email:</label>
-                            <input type="email" id="email" name="from_email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message:</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <button type="submit">Send Message</button>
-                    </form>
-                </div>
-            </div>
+            <!-- ... contact section content ... -->
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>QM Makeup</h4>
-                <p>Professional manufacturer of permanent makeup and eyelash products since 2010.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                    <a href="#"><i class="fab fa-whatsapp"></i></a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="#products">Products</a></li>
-                    <li><a href="#customization">Customization</a></li>
-                    <li><a href="#cases">Success Cases</a></li>
-                    <li><a href="#articles">Articles</a></li>
-                </ul>
-            </div>
-            
-            <div class="footer-section">
-                <h4>Contact Us</h4>
-                <p><i class="fas fa-phone"></i> +86 181 2277 8219</p>
-                <p><i class="fas fa-envelope"></i> info@qmmakeup.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> Room 1027, 10F, Niu Ben Fortune Building, Baiyun District, Guangzhou</p>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 QM Makeup. All Rights Reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-        </div>
-    </footer>
+    <div id="footer-container"></div>
 
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadComponents();
+        });
+    </script>
 </body>
 </html> 
